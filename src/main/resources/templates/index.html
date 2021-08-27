@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
+<title>Swan Schule</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+
+<link rel="stylesheet" type="text/css" href="css/mag.css"
+	th:href="@{/css/mag.css}"></link>
+
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext' rel='stylesheet"
+	th:href="@{https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext}"></link>
+<link rel="stylesheet" type="text/css" href="css/standard.css"
+	th:href="@{/css/standard.css}"></link>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="http://swan-schule.com/"> <img
+					alt="Titel"
+					src="https://www.medisana.de/out/medisana/img/MedisanaLogo.png" />
+					<!-- "http://swan-schule.com/images/templates/dd_highschool_43/images/swan-Final_s.png" /> -->
+				</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<br /> <br />
+				<div th:if="${not #lists.isEmpty(userName)}">
+					<ul class="nav nav-sidebar">
+						<li><a href="../school/add_student">Add Student</a></li>
+						<li><a href="../school/add_document">Add Document</a></li>
+					</ul>
+				</div>
+				<ul class="nav nav-sidebar">
+					<li><a href="../school/verification_of_document"> Document
+							verification</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- ************************************* -->
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+		<div align="right">
+
+			<div th:if="${not #lists.isEmpty(userName)}">
+				<p th:text="${userName}"></p>
+				<a href="comments.html" th:href="@{/logout}">LogOut</a>
+			</div>
+			<div th:if="${#lists.isEmpty(userName)}">
+				<a href="comments.html" th:href="@{/login}">Login</a>
+			</div>
+		</div>
+		<div align="center">
+			<p th:text="${success}"></p>
+			<div th:if="${not #lists.isEmpty(verification_code)}">
+				<p th:text="${verification_code}"></p>
+			</div>
+		</div>
+		<!-- *****************Add Student******************** -->
+		<div th:if="${not #lists.isEmpty(addStudentLink)}">
+			<p th:text="${errorData}"></p>
+			<form action="#" th:action="@{/data/add_student}"
+				th:object="${student}" method="post">
+				<table>
+					<tr>
+						<td>First Name:</td>
+						<td><input type="text" th:field="*{firstName}" /></td>
+					</tr>
+					<tr>
+						<td>Last Name:</td>
+						<td><input type='text' name='last_name'
+							th:field="*{lastName}" /></td>
+					</tr>
+					<tr>
+						<td>Birth date:</td>
+						<td><input type='date' name='birth_date'
+							th:field="*{birthDate}" /></td>
+					</tr>
+					<tr>
+						<td>Telephone Number:</td>
+						<td><input type='tel' name='telephone_number'
+							th:field="*{telephoneNumber}" /></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type='email' name='email' th:field="*{email}" /></td>
+					</tr>
+					<tr>
+						<td>address:</td>
+						<td><input type='text' name='address' th:field="*{address}" /></td>
+					</tr>
+					<tr>
+						<td>Nationality:</td>
+						<td><input type='text' name='nationality'
+							th:field="*{nationality}" /></td>
+					</tr>
+					<tr>
+						<td>Note:</td>
+						<td><textarea name='note' id='note' th:field="*{note}">
+							</textarea></td>
+					</tr>
+
+					<tr>
+						<td><input name="submit" type="submit" value="submit" /></td>
+						<td><input type="reset" value="Reset" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+		<!-- *****************Add Document******************** -->
+		<div th:if="${not #lists.isEmpty(addDocumentLink)}">
+			<p th:text="${errorData}"></p>
+			<form action="#" th:action="@{/data/add_document}"
+				th:object="${selectedOption}" method="post">
+				<table>
+					<tr>
+						<td>Document:</td>
+						<td><select id="selectedOption" name="selectedOption">
+								<option th:each="document : ${documents}" th:value="${document}"
+									th:utext="${document}" />
+						</select></td>
+					</tr>
+					<tr>
+						<td>Student First Name:</td>
+						<td><input type='text' name='firstName'
+							th:object="${firstName}" /></td>
+					</tr>
+					<tr>
+						<td>Student Last Name:</td>
+						<td><input type='text' name='lastName'
+							th:object="${lasttName}" /></td>
+					</tr>
+					<tr>
+						<td>Price:</td>
+						<td><input type='text' name='price' th:object="${price}" /></td>
+					</tr>
+					<tr>
+						<td>Result:</td>
+						<td><input type='text' name='result' th:object="${result}" /></td>
+					</tr>
+					<tr>
+						<td>Level:</td>
+						<td><input type='text' name='level' th:object="${level}" /></td>
+					</tr>
+
+					<tr>
+						<td>
+							<button type="submit">submit</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<!-- *****************Document Verification******************** -->
+		<div th:if="${not #lists.isEmpty(proofOfDocumentLink)}">
+			<div align="center">
+				<h1>Document Verification</h1>
+				<form action="#" th:action="@{/verification_of_document_id}"
+					method="post">
+					<p>Verification code</p>
+					<input type='text' name='documentId' th:object="${documentId}" />
+					<button type="submit">submit</button>
+				</form>
+			</div>
+		</div>
+		<!-- *****************Document id Verification******************** -->
+		<div th:if="${not #lists.isEmpty(proofOfDocumentIdLink)}">
+			<div align="center" style="padding-top: 125px;">
+				<div th:if="${not #lists.isEmpty(proofOfDocument)}">
+					<table style="table-layout: auto; padding: 15px;">
+						<tr>
+							<td>
+								<h2>First Name:</h2>
+							</td>
+							<td>
+								<h2 th:text="${firstName}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h2>Last Name:</h2>
+							</td>
+							<td>
+								<h2 th:text="${lastName}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h2>Birth Date:</h2>
+							</td>
+							<td>
+								<h2 th:text="${birthDate}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h2>Nationality:</h2>
+							</td>
+							<td>
+								<h2 th:text="${nationality}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-right: 15px;">
+								<h2>Document Type:</h2>
+							</td>
+							<td>
+								<h2 th:text="${documentName}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h2>Paid:</h2>
+							</td>
+							<td>
+								<h2 th:text="${paid}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h2>Level:</h2>
+							</td>
+							<td>
+								<h2 th:text="${level}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h2>Result:</h2>
+							</td>
+							<td>
+								<h2 th:text="${result}"></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h2></h2>
+							</td>
+							<td>
+								<h2></h2>
+							</td>
+						</tr>
+					</table>
+					<a href="comments.html" th:href="@{/verification_of_document}">Enter
+						New verification code</a>
+				</div>
+				<div th:if="${#lists.isEmpty(proofOfDocument)}">
+					<h1>The document is incorrect</h1>
+					<a href="comments.html" th:href="@{/verification_of_document}">Enter
+						New verification code</a>
+				</div>
+			</div>
+		</div>
+		<!--  ************************************************************** -->
+
+	</div>
+
+
+	<!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
+	<script src="js/bootstrap.js"></script>
+</body>
+</html>
+
+

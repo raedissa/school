@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
+<title>Swan Schule</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="css/mag.css"
+	th:href="@{/css/mag.css}"></link>
+
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext' rel='stylesheet"
+	th:href="@{https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext}"></link>
+<link rel="stylesheet" type="text/css" href="css/standard.css"
+	th:href="@{/css/standard.css}"></link>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="http://swan-schule.com/"> <img
+					alt="Titel"
+					src="https://www.medisana.de/out/medisana/img/MedisanaLogo.png" />
+					<!-- "http://swan-schule.com/images/templates/dd_highschool_43/images/swan-Final_s.png" /> -->
+
+				</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<br /> <br />
+				<ul class="nav nav-sidebar">
+					<li><a href="../school/add_student">Add Student</a></li>
+					<li><a href="../school/add_document">Add Document</a></li>
+					<li><a href="../school/verification_of_document">Document
+							Verification</a></li>
+				</ul>
+			</div>
+
+			<div class="navbar-form navbar-right">
+
+				<div sec:authorize="isAuthenticated()">
+					<a class="btn btn-success" th:href="@{/dashboard}">Dashboard</a>
+				</div>
+
+				<div sec:authorize="isAnonymous()">
+					<a class="btn btn-success" th:href="@{/login}">Login</a> <a
+						class="btn btn-primary" th:href="@{/register}">Register</a>
+				</div>
+
+			</div>
+			<!-- ************************************* -->
+
+
+		</div>
+	</div>
+
+	<!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
+	<script src="js/bootstrap.js"></script>
+</body>
+</html>
+
+

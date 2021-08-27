@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
+<title>Swan Schule</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="css/mag.css"
+	th:href="@{/css/mag.css}"></link>
+
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext' rel='stylesheet"
+	th:href="@{https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext}"></link>
+<link rel="stylesheet" type="text/css" href="css/standard.css"
+	th:href="@{/css/standard.css}"></link>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid">
+
+			<a class="navbar-brand" href="http://swan-schule.com/"> <img
+				alt="Titel"
+				src="https://www.medisana.de/out/medisana/img/MedisanaLogo.png" />
+				<!-- "http://swan-schule.com/images/templates/dd_highschool_43/images/swan-Final_s.png" /> -->
+			</a> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+			<div align="center">
+				<div th:if="${#lists.isEmpty(loggedIn)}">
+
+					<h1>Login</h1>
+
+					<!-- /login?error=true -->
+					<div th:if="${#request.getParameter('error') == 'true'}"
+						style="color: red; margin: 10px 0px;">
+						Login Failed!!!<br /> Reason : <span
+							th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+							th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+							Static summary </span>
+					</div>
+					<h3>Enter user name and password:</h3>
+					<form name='f' th:action="@{/j_spring_security_check}"
+						method='POST'>
+						<table>
+							<tr>
+								<td>User:</td>
+								<td><input type='text' name='username' value=''></td>
+							</tr>
+							<tr>
+								<td>Password:</td>
+								<td><input type='password' name='password' /></td>
+							</tr>
+							<tr>
+								<td><input style="text-align: right;" name="submit"
+									type="submit" value="submit" /></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div th:if="${not #lists.isEmpty(loggedIn)}">
+					<h1 th:text="${loggedIn}"></h1>
+					<a href="comments.html" th:href="@{/}">Back</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!-- Include _menu.html -->
+
+
+</body>
+
+</html>

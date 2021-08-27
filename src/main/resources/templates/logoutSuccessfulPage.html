@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
+<title>Swan Schule</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+
+<link rel="stylesheet" type="text/css" href="css/mag.css"
+	th:href="@{/css/mag.css}"></link>
+
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext' rel='stylesheet"
+	th:href="@{https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,italic,latin,latin-ext}"></link>
+<link rel="stylesheet" type="text/css" href="css/standard.css"
+	th:href="@{/css/standard.css}"></link>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-fixed-top">
+		<div class="container-fluid">
+		
+				<a href="http://swan-schule.com/"> <img alt="Titel"
+					src="https://www.medisana.de/out/medisana/img/MedisanaLogo.png" />
+					<!-- "http://swan-schule.com/images/templates/dd_highschool_43/images/swan-Final_s.png" /> -->
+				</a>
+				<h2>Logout Successful!</h2>
+				<h2>
+					<br />
+					<div align="center">
+						<a href="comments.html" th:href="@{/login}">Login</a>
+					</div>
+				</h2>
+			</div>
+
+	</nav>
+	<!-- Include _menu.html -->
+
+
+
+</body>
+
+</html>
