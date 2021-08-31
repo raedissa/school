@@ -28,9 +28,10 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="http://swan-schule.com/"> <img
-					alt="Titel"
-					src="https://www.medisana.de/out/medisana/img/MedisanaLogo.png" />
-					<!-- "http://swan-schule.com/images/templates/dd_highschool_43/images/swan-Final_s.png" /> -->
+					alt="Titel" 
+					src="../logo.jpeg" width="150"/>
+					<!-- "https://www.medisana.de/out/medisana/img/MedisanaLogo.png" width="150" /> -->
+					 
 				</a>
 			</div>
 		</div>
@@ -41,8 +42,8 @@
 				<br /> <br />
 				<div th:if="${not #lists.isEmpty(userName)}">
 					<ul class="nav nav-sidebar">
-						<li><a href="../school/add_student">Add Student</a></li>
-						<li><a href="../school/add_document">Add Document</a></li>
+						<li><a href="../add_student">Add Student</a></li>
+						<li><a href="../add_document">Add Document</a></li>
 					</ul>
 				</div>
 				<ul class="nav nav-sidebar">
